@@ -10,7 +10,12 @@ AKTYWACJA ŚRODOWISKA
 
 2.1 - DLA WINDOWS
     .\python_venv\Scripts\activate
-      
+    
 INSTALACJA PLIKÓW
 
 1 - pip install -r requirements
+
+
+URUCHOMIENIE APLIKACJI
+
+    python ..\backend\app.py
