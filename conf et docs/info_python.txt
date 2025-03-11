@@ -1,0 +1,16 @@
+Instalacja środowiska
+
+1 - zainstalujcie pythona XD
+2 - w cmd przejdzcie do folderu '.\conf et docs'
+3 - python -m venv '.\python_venv'
+
+AKTYWACJA ŚRODOWISKA
+
+1 - pierwsze upewnijcie sie że jesteście w katalogu '.\conf et docs\'
+
+2.1 - DLA WINDOWS
+    .\python_venv\Scripts\activate
+      
+INSTALACJA PLIKÓW
+
+1 - pip install -r requirements
