@@ -1,0 +1,84 @@
+Skonfigurowaliśmy VPN na podstawie udostepnionego pliku .ovpn, jednak
+wprowadziliśmy kilka zmian: 
+
+dev vpn0 #tworzy wirtualny port
+dev-type tun 
+persist-tun
+persist-key
+data-ciphers AES-256-GCM:AES-128-GCM:CHACHA20-POLY1305:AES-256-CBC
+data-ciphers-fallback AES-256-CBC
+auth SHA256
+tls-client
+auth-nocache
+client
+resolv-retry infinite
+remote <ip> 1194 udp4 #wycofane ze wzgl na prywatnosc
+nobind
+verify-x509-name "VPN-SERVER" name
+auth-user-pass /*** #wycofane ze wzgl na prywatnosc
+remote-cert-tls server
+explicit-exit-notify
+key-direction 1
+pull-filter ignore "block-outside-dns" #windows-only directive
+script-security 2
+#up /etc/openvpn/client/postconnect.sh
+route-up /etc/openvpn/client/up-routes.sh #utworzyliśmy własny skrypt, aby on
+                                          #nie zmienial domyślnego rootingu
+
+
+up-routes.sh:
+
+#!/bin/bash
+
+LOG="/var/log/openvpn-routes-fix.log"
+echo "$(date): Starting route fix script" > $LOG
+
+fix_routes() {
+  echo "$(date): Checking and fixing routes..." >> $LOG
+
+  #sprawdzamy, czy pojawił się route na przekierowywanie całego trafiku
+  #do nashego VPN
+  #jak pojawił się, wyrzucamy
+
+  if ip route | grep -q "0.0.0.0/1 via <ip>"; then
+    echo "$(date): Removing 0.0.0.0/1 route" >> $LOG
+    ip route del 0.0.0.0/1 via <ip>
+  fi
+
+  if ip route | grep -q "128.0.0.0/1 via <ip>"; then
+    echo "$(date): Removing 128.0.0.0/1 route" >> $LOG
+    ip route del 128.0.0.0/1 via <ip>
+  fi
+
+
+  # Ustawiamy z powrotem domyślną drogę 
+  if ! ip route | grep -q "^default via <ip>"; then
+    echo "$(date): Default route missing, restoring" >> $LOG
+    ip route add default via <ip> dev ens3 proto dhcp src <ip> metric 100
+  fi
+
+  echo "$(date): Current routing table:" >> $LOG
+  ip route >> $LOG
+}
+
+echo "$(date): Waiting for OpenVPN to apply all routes..." >> $LOG
+sleep 3
+
+fix_routes
+echo "$(date): Initial route fix applied" >> $LOG
+
+sleep 5
+
+fix_routes
+echo "$(date): Secondary route fix applied" >> $LOG
+
+
+##########################################################
+
+Po sprawdzaniu konfiguracji ustawiliśmy autopodłączenie do tego VPN
+za pomocą polecenia
+        systemctl start openvpn@student.conf
+        systemctl enable openvpn@student.conf
+
+Za pomocą curla dowiedzieliśmy się w jaki sposób uzyskiwać dane o stronie wygenerowanej przez uczelnie,
+oraz w jaki sposób pisać zapytania do sewisu. 
