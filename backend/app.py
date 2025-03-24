@@ -13,7 +13,8 @@ def index():
 
 @app.route('/parse')
 def parse_data():
-    return jsonify(parse_all_courses())
+    jsonify(parse_all_courses())
+    return index()
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=8080)
+    app.run(debug=True)
