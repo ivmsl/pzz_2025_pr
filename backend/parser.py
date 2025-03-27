@@ -1,6 +1,7 @@
 import re
 import requests
 import json
+import sys
 
 BASE_URL = "http://plan.ii.us.edu.pl"
 
@@ -46,8 +47,11 @@ def parse_subgroups(html, parent_name):
     Zwróć słownik: { "Nazwa": {"ID": X, "Podgrupa": {}}, ... }.
     Jeśli tekst linku == nazwa_rodzica, pomiń go (unikaj duplikatów).
     """
+    # print(html, file = sys.stderr)
+
     result = {}
     for match in pattern_link.finditer(html):
+        print(match, file = sys.stderr)
         link_type, link_id, link_text = match.groups()
         link_text = link_text.strip()
         if link_text == parent_name:
@@ -71,9 +75,13 @@ def build_structure(parent_type, parent_id, parent_name):
     """
     link_value = 1
 
-    params = {"type": parent_type, "branch": parent_id, "link": link_value}
-    html = get_html(f"{BASE_URL}/left_menu_feed.php", params=params)
+    # print(parent_name, file = sys.stderr)
 
+    params = {"type": 1, "branch": parent_id, "link": link_value}
+    html = get_html(f"{BASE_URL}/left_menu_feed.php", params=params)
+    print(html, file = sys.stderr)
+    print(params, file = sys.stderr)
+    
     sub_dict = parse_subgroups(html, parent_name)
 
     # Dla każdego elementu sub_dict sprawdzamy onclick
@@ -163,6 +171,8 @@ def parse_all_courses():
 
     result = {"courses": []}
 
+
+    # print(kierunki_map, file = sys.stderr)
     for kurs_id, (kurs_type, kurs_nazwa) in kierunki_map.items():
         lata_dict = build_structure(kurs_type, kurs_id, kurs_nazwa)
 
