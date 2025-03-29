@@ -1,0 +1,101 @@
+html,body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+html>body {
+  font-size: 16px;
+  font-size: 68.75%;
+}  /* Reset Base Font Size */
+body {
+  font-family: Verdana, helvetica, arial, sans-serif;
+  font-size: 68.75%;
+  background: #fff;
+  color: #333;
+  padding-left: 5px;
+  padding-right: 5px;
+}  /* Reset Font Size */
+.treeview,.treeview ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.treeview li {
+  margin: 0;
+  padding: 3px 0pt 3px 16px;
+}
+
+.treeview li {
+  background: url(../images/tv-item.gif) 0 0 no-repeat;
+}
+
+.treeview .collapsable {
+  background-image: url(../images/tv-collapsable.gif);
+}
+
+.treeview .expandable {
+  background-image: url(../images/tv-expandable.gif);
+}
+
+.treeview .last {
+  background-image: url(../images/tv-item-last.gif);
+}
+
+.treeview .lastCollapsable {
+  background-image: url(../images/tv-collapsable-last.gif);
+}
+
+.treeview .lastExpandable {
+  background-image: url(../images/tv-expandable-last.gif);
+}
+
+.img_collapsed {
+  position: relative;
+  left: -13px;
+}
+
+.imgbranch {
+  position: relative;
+  left: -13px;
+}
+
+A:link {
+  color: #000066;
+  text-decoration: none;
+}
+
+A:visited {
+  color: #000066;
+  text-decoration: none;
+}
+
+A:active {
+  color: #000066;
+  text-decoration: none;
+}
+
+A:hover {
+  color: #000066;
+  text-decoration: underline;
+}
+
+.cursor_prog {
+  cursor: progress;
+}
+
+TABLE.branch3 {
+  border-style: none;
+}
+
+TABLE.branch2 {
+  width: 100%;
+  background-color: #A1C6EB;
+  border: 1px solid;
+  border-top-color: #A1C6EB;
+  border-right-color: #A1C6EB;
+  border-bottom-color: #A1C6EB;
+  border-left-color: #A1C6EB;
+  font-size: 11px;
+}

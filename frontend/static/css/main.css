@@ -1,0 +1,245 @@
+@charset "iso-8859-2";
+
+BODY {
+  SCROLLBAR-FACE-COLOR: #eeeeee;
+  SCROLLBAR-HIGHLIGHT-COLOR: #cccccc;
+  SCROLLBAR-SHADOW-COLOR: #cccccc;
+  SCROLLBAR-ARROW-COLOR: #003399;
+  SCROLLBAR-TRACK-COLOR: #eeeeee;
+  SCROLLBAR-BASE-COLOR: #eeeeee;
+  scrollbar-dark-shadow-color: #cccccc;
+  scrollbar-3d-light-color: White;
+  FONT-FAMILY: Verdana;
+  FONT-SIZE: 12px;
+  BACKGROUND-COLOR: #ffffff;
+}
+
+A {
+  COLOR: #CC0000;
+  FONT-FAMILY: Verdana, Helvetica, Arial;
+  BACKGROUND-COLOR: transparent;
+}
+
+A:active {
+  COLOR: #003399;
+  TEXT-DECORATION: underline;
+}
+
+A:link {
+  COLOR: #003399;
+  TEXT-DECORATION: underline;
+}
+
+A:visited {
+  COLOR: #003399;
+  TEXT-DECORATION: underline;
+}
+
+A:hover {
+  COLOR: #FF3300;
+  TEXT-DECORATION: underline;
+}
+
+H1 {
+  PADDING-LEFT: 30px;
+  FONT-WEIGHT: bold;
+  FONT-SIZE: 14px;
+  COLOR: #003366;
+  FONT-FAMILY: Verdana;
+  LETTER-SPACING: 0px;
+  TEXT-ALIGN: center
+}
+
+H2 {
+  PADDING-RIGHT: 10px;
+  PADDING-LEFT: 10px;
+  FONT-SIZE: 12px;
+  PADDING-BOTTOM: 10px;
+  COLOR: yellow;
+  PADDING-TOP: 10px;
+  FONT-FAMILY: Verdana;
+  TEXT-ALIGN: justify
+}
+
+H3 {
+  PADDING-RIGHT: 10px;
+  PADDING-LEFT: 10px;
+  FONT-SIZE: 11px;
+  PADDING-BOTTOM: 10px;
+  COLOR: white;
+  PADDING-TOP: 10px;
+  FONT-FAMILY: Verdana;
+  LETTER-SPACING: 0px;
+  TEXT-ALIGN: justify
+}
+
+H4 {
+  PADDING-RIGHT: 10px;
+  PADDING-LEFT: 10px;
+  FONT-SIZE: 12px;
+  PADDING-BOTTOM: 10px;
+  COLOR: blanchedalmond;
+  PADDING-TOP: 10px;
+  FONT-FAMILY: Verdana;
+  LETTER-SPACING: 0px;
+  TEXT-ALIGN: justify
+}
+
+HR {
+  WIDTH: 100%;
+  COLOR: #fcbe03;
+  HEIGHT: 1px
+}
+
+IMG {
+  BORDER-RIGHT: 0px;
+  BORDER-TOP: 0px;
+  BORDER-LEFT: 0px;
+  BORDER-BOTTOM: 0px
+}
+
+TD {
+  FONT-SIZE: 12px;
+}
+
+.ttip {
+  BORDER-RIGHT: black 1px solid;
+  BORDER-TOP: black 1px solid;
+  FONT-SIZE: 12px;
+  BORDER-LEFT: black 1px solid;
+  BORDER-BOTTOM: black 1px solid;
+  BACKGROUND-COLOR: lightyellow;
+  layer-background-color: lightyellow
+}
+
+.tabl {
+  FONT-SIZE: 3px;
+  CURSOR: hand;
+  FONT-FAMILY: Arial;
+  HEIGHT: 1mm;
+  BACKGROUND-COLOR: red;
+  TEXT-ALIGN: center
+}
+
+P {
+  MARGIN-LEFT: 0px;
+  FONT-SIZE: 14px;
+}
+
+H5 {
+  FONT-SIZE: medium;
+  COLOR: white;
+  FONT-FAMILY: Verdana;
+  HEIGHT: 10pt;
+  TEXT-ALIGN: center
+}
+
+DIV#result_plan {
+  padding: 5px;
+  border: solid 1px #cccccc;
+}
+
+DIV#result_link {
+  padding: 1px;
+}
+
+/*------------------ logowanie -----------*/
+INPUT.search {
+  BORDER-RIGHT: 1px solid;
+  BORDER-TOP: 1px solid;
+  FONT-WEIGHT: normal;
+  FONT-SIZE: 11px;
+  BORDER-LEFT: 1px solid;
+  COLOR: #6b6b6b;
+  BORDER-BOTTOM: 1px solid;
+  FONT-FAMILY: verdana, arial, arial ce, tahoma, helvetica;
+}
+
+INPUT.input {
+  BORDER-RIGHT: 1px solid;
+  BORDER-TOP: 1px solid;
+  FONT-WEIGHT: normal;
+  FONT-SIZE: 11px;
+  BORDER-LEFT: 1px solid;
+  COLOR: #6b6b6b;
+  BORDER-BOTTOM: 1px solid;
+  FONT-FAMILY: verdana, arial, arial ce, tahoma, helvetica;
+}
+
+INPUT.inputC {
+  BORDER-RIGHT: 1px solid;
+  BORDER-TOP: 1px solid;
+  FONT-WEIGHT: normal;
+  FONT-SIZE: 11px;
+  BORDER-LEFT: 1px solid;
+  COLOR: #6b6b6b;
+  background-color: #FFFFA0;
+  BORDER-BOTTOM: 1px solid;
+  FONT-FAMILY: verdana, arial, arial ce, tahoma, helvetica;
+}
+
+SELECT.input {
+  BORDER-RIGHT: 1px solid;
+  BORDER-TOP: 1px solid;
+  FONT-WEIGHT: normal;
+  FONT-SIZE: 11px;
+  BORDER-LEFT: 1px solid;
+  COLOR: #6b6b6b;
+  BORDER-BOTTOM: 1px solid;
+  FONT-FAMILY: verdana, arial, arial ce, tahoma, helvetica;
+}
+
+.blue {
+  FONT-FAMILY: arial, arial ce, tahoma, helvetica;
+  color: #000066;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.title {
+  height: 23px;
+  font-weight: bold;
+  text-align: left;
+  background: url(../images/blue.gif);
+  font-size: 12px;
+  color: white;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  padding: 4px;
+}
+
+.titles {
+  background-color: #eeeeee;
+  border: 1px solid;
+  border-top-color: #cccccc;
+  border-right-color: #eeeeee;
+  border-bottom-color: #cccccc;
+  border-left-color: #eeeeee;
+  float: inherit;
+  margin-top: 50px;
+}
+
+.titles2 {
+  background-color: #eeeeee;
+  font-size: 12px;
+  font-family: Verdana;
+  border: 1px solid;
+  border-top-color: #cccccc;
+  border-right-color: #eeeeee;
+  border-bottom-color: #cccccc;
+  border-left-color: #eeeeee;
+  width: 100%;
+}
+
+.bg1 TD {
+  BACKGROUND: url(../images/blue.gif);
+  font-weight: bold;
+  color: #FFFFFF;
+  text-align: left;
+  padding: 5px;
+}
+
+.bg2 TD {
+  text-align: center;
+  FONT-SIZE: 10px;
+  padding: 5px;
+}
