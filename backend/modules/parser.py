@@ -41,6 +41,27 @@ def get_html(url, params=None):
     return resp.text
 
 
+def get_html2(url, params=None):
+    """
+    Funkcja obsługi pobierania HTML.
+    Przygotowuję odpowiednie kodowanie, metody poprawiania znaków w języku polskim.
+    """
+    resp = requests.get(url, params=params)
+    #resp.encoding = resp.apparent_encoding
+    return resp
+
+def post_req(url, params=None):
+    """
+    Funkcja obsługi pobierania HTML.
+    Przygotowuję odpowiednie kodowanie, metody poprawiania znaków w języku polskim.
+    """
+    resp = requests.post(url, params=params)
+
+    #resp.encoding = resp.apparent_encoding
+    resp.encoding = resp.apparent_encoding
+    return resp.text
+
+
 def parse_subgroups(html, parent_name):
     """
     Szukamy <a href="plan.php?type=..&id=.."> wewnątrz przekazanego kodu HTML.
@@ -51,8 +72,15 @@ def parse_subgroups(html, parent_name):
 
     result = {}
     for match in pattern_link.finditer(html):
-        print(match, file = sys.stderr)
+        #print(match, file = sys.stderr)
         link_type, link_id, link_text = match.groups()
+        if (parent_name == "Informatyka I stopnia (niestacjonarna)" or 
+        parent_name == "Kognitywistyka" or 
+        parent_name == "Wydział Nauk Przyrodniczych" or 
+        parent_name == "Informatyka Stosowana I stopnia"): 
+            print("LOG 2: ", html, file=sys.stderr)
+            print("LINK TEXT:", link_text, file=sys.stderr)
+    
         link_text = link_text.strip()
         if link_text == parent_name:
             continue
@@ -79,9 +107,14 @@ def build_structure(parent_type, parent_id, parent_name):
 
     params = {"type": 1, "branch": parent_id, "link": link_value}
     html = get_html(f"{BASE_URL}/left_menu_feed.php", params=params)
-    print(html, file = sys.stderr)
-    print(params, file = sys.stderr)
-    
+    #print(html, file = sys.stderr)
+    #print(params, file = sys.stderr)
+    # if (parent_name == "Informatyka I stopnia (niestacjonarna)" or 
+    #     parent_name == "Kognitywistyka" or 
+    #     parent_name == "Wydział Nauk Przyrodniczych" or 
+    #     parent_name == "Informatyka Stosowana I stopnia"): 
+    #     print(f"LOG: {parent_name}, {parent_id}, {html}")
+
     sub_dict = parse_subgroups(html, parent_name)
 
     # Dla każdego elementu sub_dict sprawdzamy onclick
@@ -171,9 +204,10 @@ def parse_all_courses():
 
     result = {"courses": []}
 
-
+    
     # print(kierunki_map, file = sys.stderr)
     for kurs_id, (kurs_type, kurs_nazwa) in kierunki_map.items():
+        print("LOG KURS_ID: ", kurs_id, (kurs_type, kurs_nazwa), file = sys.stderr)    
         lata_dict = build_structure(kurs_type, kurs_id, kurs_nazwa)
 
         lata_output = {}
@@ -190,7 +224,7 @@ def parse_all_courses():
         }
         result["courses"].append(kurs_entry)
 
-    with open("kursy.json", "w", encoding="utf-8") as f:
+    with open("./modules/kursy.json", "w", encoding="utf-8") as f:
         json.dump(result, f, ensure_ascii=False, indent=2)
 
     return result

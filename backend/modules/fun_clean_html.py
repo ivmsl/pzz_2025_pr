@@ -1,4 +1,19 @@
 import re
+import requests
+import os
+
+template_dir = os.path.abspath('../frontend/templates')
+BASE_URL = "http://plan.ii.us.edu.pl"
+
+def get_html(url, params=None):
+    """
+    Funkcja obsługi pobierania HTML.
+    Przygotowuję odpowiednie kodowanie, metody poprawiania znaków w języku polskim.
+    """
+    resp = requests.get(url, params=params)
+    resp.encoding = resp.apparent_encoding
+    return resp.text
+
 
 def clean_search(text):
     """
@@ -80,8 +95,10 @@ def clean_html(input_file, output_file):
     :param input_file: the file to read the HTML from
     :param output_file: the file to write the cleaned HTML to
     """
-    with open(input_file, "r", encoding="utf-8") as file:
-        html_content = file.read()
+    #with open(input_file, "r", encoding="utf-8") as file:
+    #    html_content = file.read()
+
+    html_content = get_html(BASE_URL + input_file)
 
     if "<title>Plan zajęć: Plan zajęć, Uniwersytet Śląski, rok 2024/2025, semestr letni</title>" in html_content:
         cleaned_html = clean_frame(html_content)
@@ -94,4 +111,14 @@ def clean_html(input_file, output_file):
         file.write(cleaned_html)
 
 
+def update_all_main():
+    clean_html("", template_dir + "/index.html")
+    clean_html("/menug.php", template_dir + "/menug.html")
+    clean_html("/main.php", template_dir + "/main.html")
 
+    lmenu_url = BASE_URL + "/left_menu.php"
+    lmenu = get_html(lmenu_url)
+    with open(template_dir + "/left_menu.html", "w", encoding="utf-8") as file:
+        file.write(lmenu)
+
+    #tworzenie statycznego pliku
