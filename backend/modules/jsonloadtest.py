@@ -95,6 +95,7 @@ def build_response_left_menu(parent_name, parent_ptr, bOne) -> str:
 
     print("PIIIIID:", pid)
     if (not bOne): resp_html = build_parent(parent_name, pid)
+    print("PARENT: ", resp_html, file=sys.stderr)
     resp_html += "<ul>"
 
     if parent_ptr.get("Lata"):
@@ -125,6 +126,7 @@ def build_response_left_menu(parent_name, parent_ptr, bOne) -> str:
         #add_child_last(parent, roks[rok].get("ID"))
 
     if resp_html: resp_html += "</ul></div>"
+    
     return resp_html
 
 
