@@ -1,6 +1,7 @@
 import re
 import requests
 import os
+import sys
 
 template_dir = os.path.abspath('../frontend/templates')
 BASE_URL = "http://plan.ii.us.edu.pl"
@@ -10,6 +11,7 @@ def get_html(url, params=None):
     Funkcja obsługi pobierania HTML.
     Przygotowuję odpowiednie kodowanie, metody poprawiania znaków w języku polskim.
     """
+    print("PARAMS: ", params, file=sys.stderr)
     resp = requests.get(url, params=params)
     resp.encoding = resp.apparent_encoding
     return resp.text

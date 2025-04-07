@@ -1,0 +1,244 @@
+.cd {
+  background-color: #eee;
+  border: 2px solid #666666;
+  font-family: verdana, helvetica;
+  font-weight: normal;
+  font-size: 10px;
+  text-align: center;
+  line-height: 20px;
+  position: absolute;
+}
+
+.cdS {
+  background-color: #fff;
+  border: 1px solid #666666;
+  border-left: solid 2px #666666;
+  border-right: solid 2px #666666;
+  position: absolute;
+}
+
+.cTop {
+  border-top: solid 1px #666666;
+}
+
+.cBottom {
+  border-bottom: solid 2px #666666;
+}
+
+.coursediv {
+  overflow: hidden;
+  text-align: center;
+  font-family: verdana, helvetica;
+  font-size: 11px;
+  font-weight: normal;
+  position: absolute;
+  padding: 5px;
+}
+
+.title {
+  height: auto;
+  font-weight: bold;
+  text-align: left;
+  background: url(../images/blue.gif);
+  font-size: 12px;
+  color: white;
+  font-family: verdana, helvetica;
+  padding: 4px;
+  border: solid 2px #666666;
+}
+
+.commentBox {
+  width: 550px;
+  position: absolute;
+  border: solid 2px #666666;
+  background-color: #eeeeee;
+}
+
+.resersFormSelect {
+  width: 200px;
+}
+
+.wBSelect {
+  width: 180px;
+}
+
+.wBBox {
+  width: 680px;
+  position: absolute;
+  border: solid 2px #666666;
+  background-color: #eeeeee;
+}
+
+.wBParent {
+  height: 22px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.wBLeft {
+  height: 14px;
+  width: 140px;
+  font-weight: normal;
+  font-size: 11px;
+  color: black;
+  font-family: verdana, helvetica;
+  text-align: right;
+  padding: 4px;
+  padding-right: 4px;
+  background-color: #eeeeee;
+  float: left;
+}
+
+.wBRight {
+  height: 22px;
+  width: 180px;
+  font-weight: normal;
+  font-size: 11px;
+  color: black;
+  font-family: verdana, helvetica;
+  text-align: left;
+  padding-left: 8px;
+  background-color: #eeeeee;
+  float: left;
+}
+
+.wBCheck {
+  height: 22px;
+  width: 480px;
+  font-weight: normal;
+  font-size: 11px;
+  color: black;
+  font-family: verdana, helvetica;
+  text-align: left;
+  padding-left: 8px;
+  background-color: #eeeeee;
+  float: left;
+}
+
+#wBButton {
+  position: absolute;
+  top: 85px;
+  left: 300px;
+  width: 100px;
+}
+
+.wbInfo {
+  font-weight: normal;
+  font-size: 11px;
+  color: black;
+  font-family: verdana, helvetica;
+  text-align: left;
+  padding-left: 8px;
+  background-color: #eeeeee;
+}
+
+.dataBox {
+  width: 450px;
+  position: absolute;
+  border: solid 2px #666666;
+  background-color: #eeeeee;
+}
+
+.resersHint {
+  height: 16px;
+  line-height: 10px;
+  font-size: 11px;
+  font-weight: normal;
+  color: #000000;
+  font-family: verdana, helvetica;
+  text-align: center;
+  padding: 4px;
+}
+
+.titleBar {
+  height: auto;
+  font-weight: bold;
+  font-size: 12px;
+  color: white;
+  font-family: verdana, helvetica;
+  text-align: left;
+  padding: 4px;
+  background: url(../images/blue.gif);
+  border-bottom: solid 2px #666666;
+}
+
+.resersFormParent {
+  height: 26px;
+}
+
+.resersFormCenter {
+  height: auto;
+  font-weight: normal;
+  font-size: 11px;
+  color: black;
+  font-family: verdana, helvetica;
+  text-align: center;
+  padding: 4px;
+  background-color: #eeeeee;
+}
+
+.resersFormLeft {
+  height: 14px;
+  width: 110px;
+  font-weight: normal;
+  font-size: 11px;
+  color: black;
+  font-family: verdana, helvetica;
+  text-align: right;
+  padding: 4px;
+  padding-right: 4px;
+  background-color: #eeeeee;
+  position: relative;
+  top: 0px;
+  left: 0px;
+}
+
+.resersFormRight {
+  height: 22px;
+  width: 220px;
+  font-weight: normal;
+  font-size: 11px;
+  color: black;
+  font-family: verdana, helvetica;
+  text-align: left;
+  padding-left: 8px;
+  background-color: #eeeeee;
+  position: relative;
+  top: -22px;
+  left: 120px;
+}
+
+.data {
+  width: auto;
+  font-size: 11px;
+  font-family: verdana, helvetica;
+  text-align: left;
+  background-color: #eee;
+  padding: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.data A:active {
+  COLOR: #003399;
+  TEXT-DECORATION: underline;
+  font-weight: normal;
+}
+
+.data A:link {
+  COLOR: #003399;
+  TEXT-DECORATION: underline;
+  font-weight: normal;
+}
+
+.data A:visited {
+  COLOR: #003399;
+  TEXT-DECORATION: underline;
+  font-weight: normal;
+}
+
+.data A:hover {
+  COLOR: #FF3300;
+  TEXT-DECORATION: underline;
+  font-weight: normal;
+}

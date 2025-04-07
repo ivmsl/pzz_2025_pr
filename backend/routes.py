@@ -1,8 +1,7 @@
 from flask import render_template, request, redirect, url_for, Response, jsonify, send_from_directory
 from modules.parser import parse_all_courses
-from modules.fun_clean_html import update_all_main
+from modules.fun_clean_html import update_all_main, get_html
 from modules.jsonloadtest import get_mock_resp
-
 import sys
 
 BASE_URL = "http://plan.ii.us.edu.pl"
@@ -12,6 +11,11 @@ def register_routes(app):
     @app.route('/')
     def index():
         return render_template("index.html")
+
+    @app.route('/plan.php')
+    def left_menu():
+        text = get_html(f"{BASE_URL}/plan.php", params = request.args)
+        return text
 
     @app.route('/menug.php')
     def menug():
