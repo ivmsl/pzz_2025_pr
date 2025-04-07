@@ -1,0 +1,7 @@
+# Ignore specific JSON file
+kursy.json
+
+# Ignore Python cache directories
+__pycache__/
+*.py[cod]
+*$py.class
