@@ -2,7 +2,7 @@ import re
 #import requests
 import json
 import sys
-
+from parser import parse_all_courses
 
 
 
@@ -23,8 +23,16 @@ def add_child_cont(nazwa, pid) -> str:
         <div id="div_{pid}" style=" display: none; "></div> \
       </li>'
 
-with open("./modules/kursy.json", 'r') as f:
-    json_object = json.load(f)
+def loadjson():
+    try:
+        with open("./modules/kursy.json", 'r') as f:
+            json_object = json.load(f)
+    except:
+        json_object = parse_all_courses()
+    
+    return json_object
+
+json_object = loadjson()
 
 def look_for_ptr_name(s_id) -> tuple[str, dict]:
     parent_ptr = None
