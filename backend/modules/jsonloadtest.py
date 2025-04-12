@@ -2,7 +2,7 @@ import re
 #import requests
 import json
 import sys
-from parser import parse_all_courses
+from .parser import parse_all_courses
 
 
 
