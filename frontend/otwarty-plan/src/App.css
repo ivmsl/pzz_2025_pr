@@ -1,0 +1,92 @@
+/* Timetable */
+.timetable-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed; 
+}
+
+.timetable-wrapper {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  overflow-x: auto;
+}
+
+
+.timetable-table th,
+.timetable-table td {
+  border: 1px solid #ccc;
+  text-align: center;
+  padding: 8px;
+  height: 30px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* Szerokość dla kolumn z godzinami */
+.hour-cell {
+  width: 80px;
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
+.day-cell {
+  width: 14.28%; 
+}
+
+
+
+body, html, #root {
+  height: 100%;
+  margin: 0;
+}
+
+.app-container {
+  display: flex;
+  height: calc(100vh - 50px); 
+}
+
+.timetable {
+  flex: 1;
+  overflow-y: auto;
+}
+
+
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    padding: 20px;
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  
+  .select-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .select-group select {
+    padding: 8px;
+    font-size: 16px;
+    margin-top: 4px;
+  }
+  
+  .sidebar button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: rgb(11, 65, 174);
+    color: white;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  
