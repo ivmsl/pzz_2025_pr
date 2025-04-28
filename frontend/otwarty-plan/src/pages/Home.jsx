@@ -1,10 +1,10 @@
+import React from 'react';
 import Timetable from '../components/Timetable';
 
-export default function Home() {
-  return (
-    <div>
-      <h1>Plan zajęć</h1>
-      <Timetable />
-    </div>
-  );
-}
+const Home = ({ plan }) => (
+  <div>
+    <Timetable plan={plan} />
+  </div>
+);
+
+export default Home;
