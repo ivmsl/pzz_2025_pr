@@ -3,7 +3,7 @@ import requests
 import os
 import sys
 
-template_dir = os.path.abspath('../frontend/templates')
+template_dir = os.environ.get("TEMPL_PATH", os.path.abspath('../frontend/templates'))
 BASE_URL = "http://plan.ii.us.edu.pl"
 
 def get_html(url, params=None):

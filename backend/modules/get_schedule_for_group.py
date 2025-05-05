@@ -2,10 +2,68 @@ import math
 import re
 import requests
 import json
+import redis
+import os
+import functools
 
 BASE_URL = "http://plan.ii.us.edu.pl"
+RDS_KEY = os.environ.get("RDS_KEY", None)
+RDS_PRT = os.environ.get("RDS_PRT", None)
+CACHE_TTL = 86400 
+
+if RDS_KEY and RDS_PRT:
+    redis_client = redis.Redis(
+    host='localhost', 
+    port=RDS_PRT, 
+    db=0,
+    password=RDS_KEY,  # Add your password here
+    decode_responses=False  # Important when using pickle
+    )
+else:
+    redis_client = None
 
 
+def redis_cache(prefix, ttl=CACHE_TTL):
+    """
+    Dekorator dla cache Redis.
+    
+    Args:
+        prefix: prefix klucza
+        ttl: TTL in seconds
+        
+    Returns:
+        Funkcja
+    """
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            # Create a unique cache key based on function name, prefix, and arguments
+            cache_key = f"{prefix}:{func.__name__}:{str(args)}:{str(kwargs)}"
+            cached_data = None
+
+            # Try to get from cache first
+            if redis_client:
+                cached_data = redis_client.get(cache_key)
+            if cached_data:
+                return pickle.loads(cached_data)
+            
+            # Cache miss, call the original function
+            data = func(*args, **kwargs)
+            
+            # Store in cache with TTL
+            if redis_client and data != None:
+                redis_client.setex(
+                    cache_key, 
+                    ttl,
+                    pickle.dumps(data)
+                )
+            
+            return data
+        return wrapper
+    return decorator
+
+
+@redis_cache(prefix="html")
 def get_html_for_group(group_id):
     """
     Wykonuje zapytanie HTTP, pobierając HTML dla danej grupy.
@@ -22,6 +80,27 @@ def get_html_for_group(group_id):
     resp.encoding = resp.apparent_encoding
     return resp.text
 
+
+@redis_cache(prefix="schedule")
+def get_schedule_for_group(group_id):
+    """
+    Pobiera rozkład zajęć dla danej grupy na podstawie jej ID:
+      - Wykonuje zapytanie do zewnętrznej strony,
+      - Parsuje otrzymany HTML za pomocą parse_schedule,
+      - Zwraca strukturę rozkładu zajęć lub None w przypadku błędu.
+    """
+    try:
+        group_id = int(group_id)
+    except ValueError:
+        return None
+    try:
+        html_text = get_html_for_group(group_id)
+        sched = parse_schedule(html_text)
+        return sched
+    except Exception as e:
+        print("Błąd podczas pobierania rozkładu zajęć:", e)
+        return None
+    
 
 def px_to_time(top_px, round_mode="nearest"):
     """
@@ -168,22 +247,3 @@ def parse_schedule(html_text):
 
     return schedule
 
-
-def get_schedule_for_group(group_id):
-    """
-    Pobiera rozkład zajęć dla danej grupy na podstawie jej ID:
-      - Wykonuje zapytanie do zewnętrznej strony,
-      - Parsuje otrzymany HTML za pomocą parse_schedule,
-      - Zwraca strukturę rozkładu zajęć lub None w przypadku błędu.
-    """
-    try:
-        group_id = int(group_id)
-    except ValueError:
-        return None
-    try:
-        html_text = get_html_for_group(group_id)
-        sched = parse_schedule(html_text)
-        return sched
-    except Exception as e:
-        print("Błąd podczas pobierania rozkładu zajęć:", e)
-        return None
