@@ -29,16 +29,66 @@ const Sidebar = ({ onSearch }) => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.json();
       })
-      .then(data => setLata(data))
+      .then(data => {setLata(data);
+            //console.log(data)  
+          })
       .catch(err => console.error('Error fetching lata:', err));
   }, [kierunek, kierunki]);
 
   useEffect(() => {
     if (!rok || !lata) return;
-    const yearKey = Object.keys(lata).find(key => key.includes(`${rok} rok`));
+    const yearKey = Object.keys(lata).find(key => key.includes(`${rok}`));
+    //console.log("Year Key:", yearKey, "Available Years:", Object.keys(lata), "Selected Year:", rok);
     if (!yearKey) return;
-    setGrupy(Object.entries(lata[yearKey].Grupy));
+
+    const parseGrupy = (grupy) => {
+      //console.log("Initial Grupy:", grupy);
+      const hasPodgrupy = Object.values(grupy).some(
+        grupa => grupa.Podgrupy && Object.keys(grupa.Podgrupy).length > 0
+      );
+
+      if (hasPodgrupy) {
+        let result = {};
+        Object.values(grupy).forEach(grupa => {
+          if (grupa.Podgrupy && Object.keys(grupa.Podgrupy).length > 0) {
+            result = { ...result, ...grupa.Podgrupy };
+          }
+        });
+        //console.log("Parsed Grupy with Podgrupy:", result);
+        return result;
+      }
+
+      //console.log("Parsed Grupy without Podgrupy:", grupy);
+      return grupy;
+    };
+
+    if (!lata[yearKey] || !lata[yearKey].Grupy) {
+      console.error("No Grupy found for this year.");
+      setTimeout(() => {
+        alert('Plan nie istnieje');
+      }, 500);
+      return;
+    }
+
+    const parsedGrupy = Object.entries(parseGrupy(lata[yearKey].Grupy));
+    //console.log("Final Parsed Grupy:", parsedGrupy);
+    setGrupy(parsedGrupy);
+
+    const hasValidGrupy = parsedGrupy.some(([name, group]) => {
+      if (group.Podgrupy) {
+        return Object.keys(group.Podgrupy).length > 0;
+      }
+      return !!group;
+    });
+
+    if (!hasValidGrupy) {
+      console.warn("Brak grup lub puste grupy. Plan nie istnieje.");
+      setTimeout(() => {
+        alert('Plan nie istnieje');
+      }, 500);
+      }
   }, [rok, lata]);
+
 
   return (
     <div className="sidebar">
@@ -58,7 +108,7 @@ const Sidebar = ({ onSearch }) => {
           <option value="">— wybierz —</option>
           {Object.keys(lata).map(key => {
             const match = key.match(/(\d)\s*rok/);
-            const value = match ? match[1] : key;
+            const value = match ? key : key; //było match[1] : key
             return <option key={key} value={value}>{key}</option>;
           })}
         </select>
@@ -75,8 +125,17 @@ const Sidebar = ({ onSearch }) => {
       </div>
 
       <button onClick={() => {
-        if (!grupa) return alert('Wybierz grupę');
-        onSearch(grupa);
+        if (!grupa) {
+
+          // console.log(lata[rok].ID)
+
+          // console.log("ROK: ", rok);
+          if (lata[rok].ID) onSearch(lata[rok].ID);
+        } else {
+          onSearch(grupa);
+        }
+        // return alert('Wybierz grupę');
+        
       }}>
         Wyszukaj
       </button>
