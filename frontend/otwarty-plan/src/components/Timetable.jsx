@@ -3,7 +3,7 @@ import Course from './Course';
 import '../App.css';
 
 const Timetable = ({ plan = {} }) => {
-  const days = ['poniedziałek','wtorek','środa','czwartek','piątek'];
+  const days = ['PN', 'WT', 'SR', 'CZ', 'PT'];
   const startHour = 7;
   const endHour   = 18;
   const slots = Array.from(
@@ -16,14 +16,13 @@ const Timetable = ({ plan = {} }) => {
     }
   );
   const skip = Array(days.length).fill(0);
-  console.log(days)
 
   return (
     <table className="timetable-table">
       <thead>
         <tr>
           <th></th>
-          {days.map(d => <th key={d}>{d[0].toUpperCase() + d.slice(1)}</th>)}
+          {days.map(d => <th key={d}>{d}</th>)}
         </tr>
       </thead>
       <tbody>
@@ -42,23 +41,27 @@ const Timetable = ({ plan = {} }) => {
                 return null;
               }
 
-              const lessons = plan[day] || {};
-              const entry = Object.entries(lessons).find(
-                ([, [start]]) =>
-                  `${Math.floor(start/100)}:${String(start%100).padStart(2,'0')}` === time
+              const lessons = plan[day] || [];
+              const entry = lessons.find(
+                lesson => {
+                  const startTime = `${Math.floor(lesson.Start/100)}:${String(lesson.Start%100).padStart(2,'0')}`;
+                  return startTime === time;
+                }
               );
-              console.log(entry)
 
               if (entry) {
-                const [name, [start, end, room, teacher]] = entry;
-                const startMin = Math.floor(start/100)*60 + (start%100);
-                const endMin   = Math.floor(end/100)*60   + (end%100);
+                const startMin = Math.floor(entry.Start/100)*60 + (entry.Start%100);
+                const endMin   = Math.floor(entry.End/100)*60   + (entry.End%100);
                 const rowSpan = (endMin - startMin) / 15;
                 skip[colIdx] = rowSpan - 1;
 
                 return (
                   <td key={day} className="time-cell" rowSpan={rowSpan}>
-                    <Course name={name} room={room} teacher={teacher} />
+                    <Course 
+                      name={entry.Subject} 
+                      room={entry.Room} 
+                      teacher={entry.Teacher} 
+                    />
                   </td>
                 );
               }
