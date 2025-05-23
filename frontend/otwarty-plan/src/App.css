@@ -11,7 +11,7 @@ body {
 .app-container {
   display: flex;
   min-height: 100vh;
-  padding-top: 70px;
+  padding-top: 0px;
 }
 .sidebar {
   width: 250px;
@@ -100,7 +100,7 @@ body {
   height: 100%;
   background: #9ecfff;
   border: 1px solid #0077cc;
-  border-radius: 4px;
+  border-radius: 10px;
   padding: 4px;
 
   display: flex;
@@ -109,20 +109,18 @@ body {
   align-items: center;
   text-align: center;
 
-  font-size: 14px;
+  font-size: 15px;
   color: #000;
 }
 
-/* Zmniejszamy wysokość rzędów */
 .timetable-table .time-cell,
 .timetable-table .hour-cell {
-  height: 20px;          /* nowe mniejsze 20px zamiast 30px */
-  line-height: 20px;     /* wyrównanie tekstu w hour-cell */
-  font-size: 12px;       /* drobniejsza czcionka, żeby zmieścić treść */
+  height: 20px;          
+  line-height: 20px;     
+  font-size: 12px;       
 }
 
-/* Zmniejszamy odstępy wewnątrz kursów */
 .course-block {
-  padding: 2px;          /* mniej paddingu */
-  font-size: 12px;       /* dopasowana wielkość czcionki */
+  padding: 2px;        
+  font-size: 15px;  
 }
